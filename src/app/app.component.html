@@ -1,7 +1,12 @@
-<button (click)=onclick()>hello</button>
-<p *ngIf="(joke$ | async) as test">
-  {{ test }}
-</p>
-<p *ngIf="(punchline$ | async) as test">
-  {{ test }}
-</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-8 text-center">
+      <p *ngIf="(joke$ | async) as joke">
+        {{ joke }}
+      </p>
+      <p *ngIf="(punchline$ | async) as punchline">
+        {{ punchline }}
+      </p>
+    </div>
+  </div>
+</div>

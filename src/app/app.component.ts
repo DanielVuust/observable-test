@@ -12,14 +12,31 @@ export class AppComponent {
   joke$ : Observable<string> | undefined;
   punchline$ : Observable<string> | undefined;
 
-  jokeService = new JokeService();    
+  constructor(private jokeService: JokeService) {
+    this.displayJokesOnInterval();
+  }
+  async displayJokesOnInterval(){
+    this.displayRandomJokeAndPunchLine();
 
-  title = 'observable-test';
-  async onclick(){
+    setInterval(()=>{
+      this.displayRandomJokeAndPunchLine();
+
+    }, 7000);
+  }
+  async displayRandomJokeAndPunchLine(){
     let index = Math.floor(Math.random() * this.jokeService.getJokeCount());
     this.joke$ = this.jokeService.getJoke(index);
     setTimeout( () => { 
       this.punchline$ = this.jokeService.getPunchline(index); 
+    this.playSound();
+
     }, 3000 );
+  }
+  async playSound(){
+    console.log('sound');
+    let audio = new Audio();
+    audio.src = "../assets/rimshot-joke-funny-80325.mp3";
+    audio.load();
+    audio.play();
   }
 }
